@@ -16,13 +16,13 @@ namespace SysBot.Pokemon.Discord
         }
 
         [Command("help")]
-        [Summary("Lists available commands.")]
+        [Summary("Muestra los comandos disponibles.")]
         public async Task HelpAsync()
         {
             var builder = new EmbedBuilder
             {
                 Color = new Color(114, 137, 218),
-                Description = "These are the commands you can use:",
+                Description = "Estos son los comandos que puedes usar:",
             };
 
             var mgr = SysCordSettings.Manager;
@@ -65,25 +65,25 @@ namespace SysBot.Pokemon.Discord
                 });
             }
 
-            await ReplyAsync("Help has arrived!", false, builder.Build()).ConfigureAwait(false);
+            await ReplyAsync("La ayuda ha llegado!", false, builder.Build()).ConfigureAwait(false);
         }
 
         [Command("help")]
-        [Summary("Lists information about a specific command.")]
-        public async Task HelpAsync([Summary("The command you want help for")] string command)
+        [Summary("Proporciona información sobre un comando específico.")]
+        public async Task HelpAsync([Summary("El comando para el que desea ayuda")] string command)
         {
             var result = _service.Search(Context, command);
 
             if (!result.IsSuccess)
             {
-                await ReplyAsync($"Sorry, I couldn't find a command like **{command}**.").ConfigureAwait(false);
+                await ReplyAsync($"Lo siento, no pude encontrar el comando que me pediste: **{command}**.").ConfigureAwait(false);
                 return;
             }
 
             var builder = new EmbedBuilder
             {
                 Color = new Color(114, 137, 218),
-                Description = $"Here are some commands like **{command}**:",
+                Description = $"Aquí hay algunos comandos como: **{command}**:",
             };
 
             foreach (var match in result.Commands)
@@ -98,12 +98,12 @@ namespace SysBot.Pokemon.Discord
                 });
             }
 
-            await ReplyAsync("Help has arrived!", false, builder.Build()).ConfigureAwait(false);
+            await ReplyAsync("La ayuda ha llegado!", false, builder.Build()).ConfigureAwait(false);
         }
 
         private static string GetCommandSummary(CommandInfo cmd)
         {
-            return $"Summary: {cmd.Summary}\nParameters: {GetParameterSummary(cmd.Parameters)}";
+            return $"Resumen: {cmd.Summary}\nParametros: {GetParameterSummary(cmd.Parameters)}";
         }
 
         private static string GetParameterSummary(IReadOnlyList<ParameterInfo> p)
