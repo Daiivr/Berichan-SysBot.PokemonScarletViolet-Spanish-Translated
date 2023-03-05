@@ -16,8 +16,9 @@ namespace SysBot.Pokemon.Discord
     // Copyright 2017, Christopher F. <foxbot@protonmail.com>
     public class InfoModule : ModuleBase<SocketCommandContext>
     {
-        private const string detail = "I am an open-source custom Discord bot powered by PKHeX.Core and other open-source software.";
+        private const string detail = "Soy un bot de Discord personalizado de código abierto impulsado por PKHeX.Core y otros softwares de código abierto.";
         private const string repo = "https://github.com/berichan/SysBot.PokemonScarletViolet"; // refer to https://github.com/kwsch/SysBot.NET for official SysBot.NET
+        private const string ESP = "https://github.com/Daiivr/Berichan-SysBot.PokemonScarletViolet-Spanish-Translated";
 
         [Command("info")]
         [Alias("about", "whoami", "owner")]
@@ -31,26 +32,27 @@ namespace SysBot.Pokemon.Discord
                 Description = detail,
             };
 
-            builder.AddField("Info",
-                $"- [Source Code]({repo})\n" +
-                $"- {Format.Bold("Owner")}: {app.Owner} ({app.Owner.Id})\n" +
-                $"- {Format.Bold("Library")}: Discord.Net ({DiscordConfig.Version})\n" +
-                $"- {Format.Bold("Uptime")}: {GetUptime()}\n" +
-                $"- {Format.Bold("Runtime")}: {RuntimeInformation.FrameworkDescription} {RuntimeInformation.ProcessArchitecture} " +
+            builder.AddField("Informacion",
+                $"- [Código fuente]({repo})\n" +
+                $"- [Código fuente en español]({ESP})\n" + 
+                $"- {Format.Bold("Dueña")}: {app.Owner} ({app.Owner.Id})\n" +
+                $"- {Format.Bold("Biblioteca")}: Discord.Net ({DiscordConfig.Version})\n" +
+                $"- {Format.Bold("Tiempo de actividad")}: {GetUptime()}\n" +
+                $"- {Format.Bold("Tiempo de ejecución")}: {RuntimeInformation.FrameworkDescription} {RuntimeInformation.ProcessArchitecture} " +
                 $"({RuntimeInformation.OSDescription} {RuntimeInformation.OSArchitecture})\n" +
                 $"- {Format.Bold("Buildtime")}: {GetBuildTime()}\n" +
                 $"- {Format.Bold("Core")}: {GetCoreDate()}\n" +
                 $"- {Format.Bold("AutoLegality")}: {GetALMDate()}\n"
                 );
 
-            builder.AddField("Stats",
-                $"- {Format.Bold("Heap Size")}: {GetHeapSize()}MiB\n" +
-                $"- {Format.Bold("Guilds")}: {Context.Client.Guilds.Count}\n" +
-                $"- {Format.Bold("Channels")}: {Context.Client.Guilds.Sum(g => g.Channels.Count)}\n" +
-                $"- {Format.Bold("Users")}: {Context.Client.Guilds.Sum(g => g.MemberCount)}\n"
+            builder.AddField("Estadísticas",
+                $"- {Format.Bold("Tamaño")}: {GetHeapSize()}MiB\n" +
+                $"- {Format.Bold("Servers")}: {Context.Client.Guilds.Count}\n" +
+                $"- {Format.Bold("Canales")}: {Context.Client.Guilds.Sum(g => g.Channels.Count)}\n" +
+                $"- {Format.Bold("Usuarios")}: {Context.Client.Guilds.Sum(g => g.MemberCount)}\n"
                 );
 
-            await ReplyAsync("Here's a bit about me!", embed: builder.Build()).ConfigureAwait(false);
+            await ReplyAsync("Aquí hay un poco sobre mí!", embed: builder.Build()).ConfigureAwait(false);
         }
 
         private static string GetUptime() => (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss");
