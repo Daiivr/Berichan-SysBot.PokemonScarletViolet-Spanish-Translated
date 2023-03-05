@@ -18,7 +18,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("tradeList")]
         [Alias("tl")]
-        [Summary("Prints the users in the trade queues.")]
+        [Summary("Imprime los usuarios en las colas de tradeo.")]
         [RequireSudo]
         public async Task GetTradeListAsync()
         {
@@ -35,7 +35,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("trade")]
         [Alias("t")]
-        [Summary("Makes the bot trade you the provided Pokémon file.")]
+        [Summary("Hace que el bot te intercambie el archivo de Pokémon proporcionado.")]
         [RequireQueueRole(nameof(DiscordManager.RolesTrade))]
         public async Task TradeAsyncAttach([Summary("Trade Code")] int code)
         {
@@ -45,7 +45,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("trade")]
         [Alias("t")]
-        [Summary("Makes the bot trade you a Pokémon converted from the provided Showdown Set.")]
+        [Summary("Hace que el bot te intercambie un Pokémon convertido del Set Showdown proporcionado.")]
         [RequireQueueRole(nameof(DiscordManager.RolesTrade))]
         public async Task TradeAsync([Summary("Trade Code")] int code, [Summary("Showdown Set")][Remainder] string content)
         {
@@ -92,7 +92,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("trade")]
         [Alias("t")]
-        [Summary("Makes the bot trade you a Pokémon converted from the provided Showdown Set.")]
+        [Summary("Hace que el bot te intercambie un Pokémon convertido del Set Showdown proporcionado.")]
         [RequireQueueRole(nameof(DiscordManager.RolesTrade))]
         public async Task TradeAsync([Summary("Showdown Set")][Remainder] string content)
         {
@@ -102,7 +102,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("trade")]
         [Alias("t")]
-        [Summary("Makes the bot trade you the attached file.")]
+        [Summary("Hace que el bot te intercambie el archivo adjunto.")]
         [RequireQueueRole(nameof(DiscordManager.RolesTrade))]
         public async Task TradeAsyncAttach()
         {
@@ -123,12 +123,12 @@ namespace SysBot.Pokemon.Discord
         {
             ID = id,
             Name = id.ToString(),
-            Comment = $"Added by {Context.User.Username} on {DateTime.Now:yyyy.MM.dd-hh:mm:ss} ({comment})",
+            Comment = $"Agregado por {Context.User.Username} el {DateTime.Now:yyyy.MM.dd-hh:mm:ss} ({comment})",
         };
 
         [Command("tradeUser")]
         [Alias("tu", "tradeOther")]
-        [Summary("Makes the bot trade the mentioned user the attached file.")]
+        [Summary("Hace que el bot intercambie al usuario mencionado el archivo adjunto.")]
         [RequireSudo]
         public async Task TradeAsyncAttachUser([Summary("Trade Code")] int code, [Remainder]string _)
         {
@@ -151,7 +151,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("tradeUser")]
         [Alias("tu", "tradeOther")]
-        [Summary("Makes the bot trade the mentioned user the attached file.")]
+        [Summary("Hace que el bot intercambie al usuario mencionado el archivo adjunto.")]
         [RequireSudo]
         public async Task TradeAsyncAttachUser([Remainder] string _)
         {
@@ -181,7 +181,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("giveaway")]
         [Alias("ga", "preset")]
-        [Summary("Makes the bot trade you a Pokémon from the giveaway pool.")]
+        [Summary("Hace que el bot te intercambie un Pokémon del grupo de regalos.")]
         [RequireQueueRole(nameof(DiscordManager.RolesTrade))]
         public async Task TradeGiveawayAsync([Summary("Trade Code")] int code, [Summary("Showdown Set")][Remainder] string content)
         {
@@ -212,7 +212,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("giveaway")]
         [Alias("ga", "preset")]
-        [Summary("Makes the bot trade you a Pokémon from the giveaway pool.")]
+        [Summary("Hace que el bot te intercambie un Pokémon del grupo de regalos.")]
         [RequireQueueRole(nameof(DiscordManager.RolesTrade))]
         public async Task TradeGiveawayAsync([Summary("Showdown Set")][Remainder] string content)
         {
