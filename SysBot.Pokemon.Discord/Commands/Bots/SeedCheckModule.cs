@@ -12,7 +12,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("seedCheck")]
         [Alias("checkMySeed", "checkSeed", "seed", "s", "sc", "specialrequest", "sr")]
-        [Summary("Checks the seed for a Pokémon.")]
+        [Summary("Comprueba la semilla para un Pokémon.")]
         [RequireQueueRole(nameof(DiscordManager.RolesSeed))]
         public async Task SeedCheckAsync(int code)
         {
@@ -22,7 +22,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("seedCheck")]
         [Alias("checkMySeed", "checkSeed", "seed", "s", "sc", "specialrequest", "sr")]
-        [Summary("Checks the seed for a Pokémon.")]
+        [Summary("Comprueba la semilla para un Pokémon.")]
         [RequireQueueRole(nameof(DiscordManager.RolesSeed))]
         public async Task SeedCheckAsync([Summary("Trade Code")][Remainder] string code)
         {
@@ -33,7 +33,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("seedCheck")]
         [Alias("checkMySeed", "checkSeed", "seed", "s", "sc", "specialrequest", "sr")]
-        [Summary("Checks the seed for a Pokémon.")]
+        [Summary("Comprueba la semilla para un Pokémon.")]
         [RequireQueueRole(nameof(DiscordManager.RolesSeed))]
         public async Task SeedCheckAsync()
         {
@@ -43,7 +43,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("seedList")]
         [Alias("sl", "scq", "seedCheckQueue", "seedQueue", "seedList")]
-        [Summary("Prints the users in the Seed Check queue.")]
+        [Summary("Muestra los usuarios en la cola de comprobación de semillas.")]
         [RequireSudo]
         public async Task GetSeedListAsync()
         {
@@ -60,7 +60,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("findFrame")]
         [Alias("ff", "getFrameData")]
-        [Summary("Prints the next shiny frame from the provided seed.")]
+        [Summary("Muestra el siguiente Shiny de la semilla proporcionada.")]
         public async Task FindFrameAsync([Remainder] string seedString)
         {
             var me = SysCord<T>.Runner;
@@ -83,7 +83,7 @@ namespace SysBot.Pokemon.Discord
                 x.Value = msg;
                 x.IsInline = false;
             });
-            await ReplyAsync($"Here are the details for `{r.Seed:X16}`:", embed: embed.Build()).ConfigureAwait(false);
+            await ReplyAsync($"Aquí están los detalles para: `{r.Seed:X16}`:", embed: embed.Build()).ConfigureAwait(false);
         }
     }
 }
