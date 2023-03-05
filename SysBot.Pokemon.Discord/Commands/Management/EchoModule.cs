@@ -35,11 +35,11 @@ namespace SysBot.Pokemon.Discord
                     AddEchoChannel(c, ch.ID);
             }
 
-            EchoUtil.Echo("Added echo notification to Discord channel(s) on Bot startup.");
+            EchoUtil.Echo("Se agregó una notificación de eco a los canales de Discord al iniciar Bot.");
         }
 
         [Command("echoHere")]
-        [Summary("Makes the echo special messages to the channel.")]
+        [Summary("Hace que el eco envíe mensajes especiales al canal.")]
         [RequireSudo]
         public async Task AddEchoAsync()
         {
@@ -47,7 +47,7 @@ namespace SysBot.Pokemon.Discord
             var cid = c.Id;
             if (Channels.TryGetValue(cid, out _))
             {
-                await ReplyAsync("Already notifying here.").ConfigureAwait(false);
+                await ReplyAsync("Ya estoy notificando aquí.").ConfigureAwait(false);
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace SysBot.Pokemon.Discord
 
             // Add to discord global loggers (saves on program close)
             SysCordSettings.Settings.EchoChannels.AddIfNew(new[] { GetReference(Context.Channel) });
-            await ReplyAsync("Added Echo output to this channel!").ConfigureAwait(false);
+            await ReplyAsync("Salida de eco agregada a este canal!").ConfigureAwait(false);
         }
 
         private static void AddEchoChannel(ISocketMessageChannel c, ulong cid)
@@ -75,7 +75,7 @@ namespace SysBot.Pokemon.Discord
         }
 
         [Command("echoInfo")]
-        [Summary("Dumps the special message (Echo) settings.")]
+        [Summary("Copia la configuración del mensaje especial (Echo).")]
         [RequireSudo]
         public async Task DumpEchoInfoAsync()
         {
@@ -84,44 +84,44 @@ namespace SysBot.Pokemon.Discord
         }
 
         [Command("echoClear")]
-        [Summary("Clears the special message echo settings in that specific channel.")]
+        [Summary("Borra la configuración de eco del mensaje especial en ese canal específico.")]
         [RequireSudo]
         public async Task ClearEchosAsync()
         {
             var id = Context.Channel.Id;
             if (!Channels.TryGetValue(id, out var echo))
             {
-                await ReplyAsync("Not echoing in this channel.").ConfigureAwait(false);
+                await ReplyAsync("No estoy notificando en este canal.").ConfigureAwait(false);
                 return;
             }
             EchoUtil.Forwarders.Remove(echo.Action);
             Channels.Remove(Context.Channel.Id);
             SysCordSettings.Settings.EchoChannels.RemoveAll(z => z.ID == id);
-            await ReplyAsync($"Echoes cleared from channel: {Context.Channel.Name}").ConfigureAwait(false);
+            await ReplyAsync($"Ecos borrados del canal: {Context.Channel.Name}").ConfigureAwait(false);
         }
 
         [Command("echoClearAll")]
-        [Summary("Clears all the special message Echo channel settings.")]
+        [Summary("Borra todos los ajustes del canal Echo de mensajes especiales.")]
         [RequireSudo]
         public async Task ClearEchosAllAsync()
         {
             foreach (var l in Channels)
             {
                 var entry = l.Value;
-                await ReplyAsync($"Echoing cleared from {entry.ChannelName} ({entry.ChannelID}!").ConfigureAwait(false);
+                await ReplyAsync($"Eco borrado de {entry.ChannelName} ({entry.ChannelID}!").ConfigureAwait(false);
                 EchoUtil.Forwarders.Remove(entry.Action);
             }
             EchoUtil.Forwarders.RemoveAll(y => Channels.Select(x => x.Value.Action).Contains(y));
             Channels.Clear();
             SysCordSettings.Settings.EchoChannels.Clear();
-            await ReplyAsync("Echoes cleared from all channels!").ConfigureAwait(false);
+            await ReplyAsync("Ecos borrados de todos los canales!").ConfigureAwait(false);
         }
 
         private RemoteControlAccess GetReference(IChannel channel) => new()
         {
             ID = channel.Id,
             Name = channel.Name,
-            Comment = $"Added by {Context.User.Username} on {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
+            Comment = $"Agregado por: {Context.User.Username} el {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
         };
     }
 }
