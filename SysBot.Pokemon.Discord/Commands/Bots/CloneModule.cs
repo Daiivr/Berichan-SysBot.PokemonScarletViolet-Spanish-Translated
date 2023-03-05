@@ -12,7 +12,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("clone")]
         [Alias("c")]
-        [Summary("Clones the Pokémon you show via Link Trade.")]
+        [Summary("Clona los Pokémon que muestras a través de Link Trade.")]
         [RequireQueueRole(nameof(DiscordManager.RolesClone))]
         public async Task CloneAsync(int code)
         {
@@ -22,7 +22,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("clone")]
         [Alias("c")]
-        [Summary("Clones the Pokémon you show via Link Trade.")]
+        [Summary("Clona los Pokémon que muestras a través de Link Trade.")]
         [RequireQueueRole(nameof(DiscordManager.RolesClone))]
         public async Task CloneAsync([Summary("Trade Code")][Remainder] string code)
         {
@@ -33,7 +33,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("clone")]
         [Alias("c")]
-        [Summary("Clones the Pokémon you show via Link Trade.")]
+        [Summary("Clona los Pokémon que muestras a través de Link Trade.")]
         [RequireQueueRole(nameof(DiscordManager.RolesClone))]
         public async Task CloneAsync()
         {
@@ -43,7 +43,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("cloneList")]
         [Alias("cl", "cq")]
-        [Summary("Prints the users in the Clone queue.")]
+        [Summary("Muestra los usuarios en la cola de Clonar.")]
         [RequireSudo]
         public async Task GetListAsync()
         {
