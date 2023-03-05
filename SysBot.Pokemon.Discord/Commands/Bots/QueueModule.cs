@@ -12,7 +12,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueStatus")]
         [Alias("qs", "ts")]
-        [Summary("Checks the user's position in the queue.")]
+        [Summary("Comprueba la posición del usuario en la cola.")]
         public async Task GetTradePositionAsync()
         {
             var msg = Context.User.Mention + " - " + Info.GetPositionString(Context.User.Id, out _);
@@ -21,7 +21,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueClear")]
         [Alias("qc", "tc")]
-        [Summary("Clears the user from the trade queues. Will not remove a user if they are being processed.")]
+        [Summary("Borra al usuario de las colas de tradeo. No eliminará a un usuario si se está siendo procesando.")]
         public async Task ClearTradeAsync()
         {
             string msg = ClearTrade();
@@ -30,7 +30,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueClearUser")]
         [Alias("qcu", "tcu")]
-        [Summary("Clears the user from the trade queues. Will not remove a user if they are being processed.")]
+        [Summary("Borra al usuario de las colas de tradeo. No eliminará a un usuario si se está siendo procesando.")]
         [RequireSudo]
         public async Task ClearTradeUserAsync([Summary("Discord user ID")] ulong id)
         {
@@ -40,7 +40,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueClearUser")]
         [Alias("qcu", "tcu")]
-        [Summary("Clears the user from the trade queues. Will not remove a user if they are being processed.")]
+        [Summary("Borra al usuario de las colas de tradeo. No eliminará a un usuario si se está siendo procesando.")]
         [RequireSudo]
         public async Task ClearTradeUserAsync([Summary("Username of the person to clear")] string _)
         {
@@ -53,7 +53,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueClearUser")]
         [Alias("qcu", "tcu")]
-        [Summary("Clears the user from the trade queues. Will not remove a user if they are being processed.")]
+        [Summary("Borra al usuario de las colas de tradeo. No eliminará a un usuario si se está siendo procesando.")]
         [RequireSudo]
         public async Task ClearTradeUserAsync()
         {
@@ -69,7 +69,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueClearAll")]
         [Alias("qca", "tca")]
-        [Summary("Clears all users from the trade queues.")]
+        [Summary("Borra a todos los usuarios de las colas de tradeo.")]
         [RequireSudo]
         public async Task ClearAllTradesAsync()
         {
@@ -79,7 +79,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueToggle")]
         [Alias("qt", "tt")]
-        [Summary("Toggles on/off the ability to join the trade queue.")]
+        [Summary("Activa o desactiva la posibilidad de unirse a la cola de tradeo.")]
         [RequireSudo]
         public async Task ToggleQueueTradeAsync()
         {
@@ -93,7 +93,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueMode")]
         [Alias("qm")]
-        [Summary("Changes how queueing is controlled (manual/threshold/interval).")]
+        [Summary("Cambia la forma en que se controlan las colas (manual/umbral(?)/intervalo).")]
         [RequireSudo]
         public async Task ChangeQueueModeAsync([Summary("Queue mode")] QueueOpening mode)
         {
@@ -103,7 +103,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("queueList")]
         [Alias("ql")]
-        [Summary("Private messages the list of users in the queue.")]
+        [Summary("Envia por mensajes privados la lista de usuarios en la cola.")]
         [RequireSudo]
         public async Task ListUserQueue()
         {
