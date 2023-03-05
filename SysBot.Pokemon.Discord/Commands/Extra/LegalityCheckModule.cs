@@ -39,17 +39,17 @@ namespace SysBot.Pokemon.Discord
             var builder = new EmbedBuilder
             {
                 Color = la.Valid ? Color.Green : Color.Red,
-                Description = $"Legality Report for {download.SanitizedFileName}:",
+                Description = $"Informe de Legalidad para {download.SanitizedFileName}:",
             };
 
             builder.AddField(x =>
             {
-                x.Name = la.Valid ? "Valid" : "Invalid";
+                x.Name = la.Valid ? "Valido!" : "Invalido!";
                 x.Value = la.Report(verbose);
                 x.IsInline = false;
             });
 
-            await ReplyAsync("Here's the legality report!", false, builder.Build()).ConfigureAwait(false);
+            await ReplyAsync("Aquí está el informe de legalidad!", false, builder.Build()).ConfigureAwait(false);
         }
     }
 }
