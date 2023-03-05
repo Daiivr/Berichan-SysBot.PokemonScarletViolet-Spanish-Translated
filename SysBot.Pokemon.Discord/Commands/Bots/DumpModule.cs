@@ -12,7 +12,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("dump")]
         [Alias("d")]
-        [Summary("Dumps the Pokémon you show via Link Trade.")]
+        [Summary("Copia los Pokémon que muestras a través de Link Trade.")]
         [RequireQueueRole(nameof(DiscordManager.RolesDump))]
         public async Task DumpAsync(int code)
         {
@@ -22,7 +22,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("dump")]
         [Alias("d")]
-        [Summary("Dumps the Pokémon you show via Link Trade.")]
+        [Summary("Copia los Pokémon que muestras a través de Link Trade.")]
         [RequireQueueRole(nameof(DiscordManager.RolesDump))]
         public async Task DumpAsync([Summary("Trade Code")][Remainder] string code)
         {
@@ -33,7 +33,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("dump")]
         [Alias("d")]
-        [Summary("Dumps the Pokémon you show via Link Trade.")]
+        [Summary("Copia los Pokémon que muestras a través de Link Trade.")]
         [RequireQueueRole(nameof(DiscordManager.RolesDump))]
         public async Task DumpAsync()
         {
@@ -43,7 +43,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("dumpList")]
         [Alias("dl", "dq")]
-        [Summary("Prints the users in the Dump queue.")]
+        [Summary("Muestra los usuarios en la cola de Copia.")]
         [RequireSudo]
         public async Task GetListAsync()
         {
