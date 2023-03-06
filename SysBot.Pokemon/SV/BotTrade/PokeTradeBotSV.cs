@@ -472,13 +472,13 @@ namespace SysBot.Pokemon
             if ((!IsSafe && !AbuseSettings.AllowGloballyBlacklistedAccounts) || (multi && AbuseSettings.AllowMultiAccountUse))
             {
                 Log($"Found known abuser: {tradePartner.TrainerName}-{tradePartner.SID}-{tradePartner.TID} ({poke.Trainer.TrainerName}) (NID: {tradePartnerNID}) origin: {poke.Notifier.IdentifierLocator}");
-                poke.SendNotification(this, $"Your savedata is associated with a known abuser. Consider not being an abuser, and you will no longer see this message.");
+                poke.SendNotification(this, $"⚠️ Tus datos guardados están asociados cun usuario que abusa del bot. Considere no ser esa clase de persona y ya no verá este mensaje.");
                 return PokeTradeResult.SuspiciousActivity;
             }
 
             Log($"Found trading partner: {tradePartner.TrainerName}-{tradePartner.TID}-{tradePartner.SID} ({poke.Trainer.TrainerName}) (NID: {tradePartnerNID}) [CODE:{poke.Code:00000000}]");
 
-            poke.SendNotification(this, $"Found Trading Partner: {tradePartner.TrainerName}. TID: {tradePartner.TID} SID: {tradePartner.SID} Waiting for a Pokémon...");
+            poke.SendNotification(this, $"Entrenador encontrado: **{tradePartner.TrainerName}**.\n\n▼\n Aqui esta tu Informacion\n **TID**: __{tradePartner.TID7}__\n **SID**: __{tradePartner.SID7}__\n▲\n\n Esperando por un __Pokémon__...");
 
             if (poke.Type == PokeTradeType.Dump)
                 return await ProcessDumpTradeAsync(poke, token).ConfigureAwait(false);
@@ -515,7 +515,7 @@ namespace SysBot.Pokemon
             if (poke.Type == PokeTradeType.Seed && itemReq == SpecialTradeType.None)
             {
                 // Immediately exit, we aren't trading anything.
-                poke.SendNotification(this, "SSRNo held item or valid request!");
+                poke.SendNotification(this, "SSRNingún artículo retenido o solicitud válida!");
                 return await EndQuickTradeAsync(poke, offered, token).ConfigureAwait(false);
             }
 
@@ -525,7 +525,7 @@ namespace SysBot.Pokemon
             {
                 if (itemReq != SpecialTradeType.None)
                 {
-                    poke.SendNotification(this, "SSRYour request isn't legal. Please try a different Pokémon or request.");
+                    poke.SendNotification(this, "⚠️ SSRSu solicitud no es legal. Intente con un Pokémon diferente.");
                     if (!string.IsNullOrWhiteSpace(Hub.Config.Web.URIEndpoint))
                         AddToPlayerLimit(tradePartner.IDHash.ToString(), -1);
                 }
@@ -534,11 +534,11 @@ namespace SysBot.Pokemon
             }
 
             if (itemReq == SpecialTradeType.WonderCard)
-                poke.SendNotification(this, "SSRDistribution success!");
+                poke.SendNotification(this, "✔ SSRDistribución completada!");
             else if (itemReq != SpecialTradeType.None && itemReq != SpecialTradeType.Shinify)
-                poke.SendNotification(this, "SSRSpecial request successful!");
+                poke.SendNotification(this, "✔ SSRSolicitud especial exitosa!");
             else if (itemReq == SpecialTradeType.Shinify)
-                poke.SendNotification(this, "SSRShinify success! Thanks for being part of the community!");
+                poke.SendNotification(this, "✔ SSRShinify completado! Gracias por ser parte de la comunidad!");
 
             Log("Confirming trade...");
 
@@ -622,7 +622,7 @@ namespace SysBot.Pokemon
             }
 
             Log($"Starting new trade, keyboard is open! Entering Link Trade code: {tradeCode:0000 0000}...");
-            poke.SendNotification(this, $"Entering Link Trade Code: {tradeCode:0000 0000}...");
+            poke.SendNotification(this, $"Introduciendo código: **{tradeCode:0000 0000}**...");
 
             // Just inject the code instead
             var offs = await SwitchConnection.PointerAll(KeyboardBufferPointer, token).ConfigureAwait(false);
@@ -719,7 +719,7 @@ namespace SysBot.Pokemon
         private async Task<(PK9 toSend, PokeTradeResult check)> HandleClone(SAV9SV sav, PokeTradeDetail<PK9> poke, PK9 offered, byte[] oldEC, CancellationToken token)
         {
             if (Hub.Config.Discord.ReturnPKMs)
-                poke.SendNotification(this, offered, "Here's what you showed me!");
+                poke.SendNotification(this, offered, "¡Aqui esta lo que me mostraste!");
 
             var la = new LegalityAnalysis(offered);
             if (!la.Valid)
@@ -730,7 +730,7 @@ namespace SysBot.Pokemon
 
                 var report = la.Report();
                 Log(report);
-                poke.SendNotification(this, "This Pokémon is not legal per PKHeX's legality checks. I am forbidden from cloning this. Exiting trade.");
+                poke.SendNotification(this, "⚠️ Este Pokémon no es __**legal**__ según los controles de legalidad de __PKHeX__. Tengo prohibido clonar esto. Cancelando trade...");
                 poke.SendNotification(this, report);
 
                 return (offered, PokeTradeResult.IllegalTrade);
@@ -741,7 +741,7 @@ namespace SysBot.Pokemon
             if (Hub.Config.Legality.ResetHOMETracker)
                 clone.Tracker = 0;
 
-            poke.SendNotification(this, $"**Cloned your {(Species)clone.Species}!**\nNow press B to cancel your offer and trade me a Pokémon you don't want.");
+            poke.SendNotification(this, $"✔ He __clonado__ tu {GameInfo.GetStrings(1).Species[clone.Species]}!**\nAhora __preciosa__ **B** para cancelar y luego seleccione un Pokémon que no quieras para reliazar el tradeo.");
             Log($"Cloned a {(Species)clone.Species}. Waiting for user to change their Pokémon...");
 
             // Separate this out from WaitForPokemonChanged since we compare to old EC from original read.
@@ -757,7 +757,7 @@ namespace SysBot.Pokemon
 
             if (!pkmChanged)
             {
-                poke.SendNotification(this, "**HEY CHANGE IT NOW OR I AM LEAVING!!!**");
+                poke.SendNotification(this, "**Porfavor cambia el pokemon ahora o cancelare el tradeo!!!**");
                 // They get one more chance.
                 pkmChanged = await ReadUntilChanged(offset, oldEC, 15_000, 0_200, false, true, token).ConfigureAwait(false);
             }
@@ -802,7 +802,7 @@ namespace SysBot.Pokemon
                 toSend = trade.Receive;
                 poke.TradeData = toSend;
 
-                poke.SendNotification(this, "Injecting the requested Pokémon.");
+                poke.SendNotification(this, "Inyectando el pokemon solicitado!");
                 await Click(A, 0_800, token).ConfigureAwait(false);
                 await SetBoxPokemon(toSend, token, sav).ConfigureAwait(false);
                 await Task.Delay(1_000, token).ConfigureAwait(false);
@@ -858,11 +858,11 @@ namespace SysBot.Pokemon
             {
                 detail.IsRetry = true;
                 Hub.Queues.Enqueue(type, detail, Math.Min(priority, PokeTradePriorities.Tier2));
-                detail.SendNotification(this, "Oops! Something happened. I'm going to requeue you for another attempt, give me a moment.");
+                detail.SendNotification(this, "⚠️ Oops! Algo ocurrio. Intentemoslo una ves mas.");
             }
             else
             {
-                detail.SendNotification(this, $"Oops! Something happened. Canceling the trade due to reason: {result}.");
+                detail.SendNotification(this, $"⚠️ Oops! Algo ocurrio. Cancelando el trade: **{result}**.");
                 detail.TradeCanceled(this, result);
             }
         }
@@ -953,7 +953,7 @@ namespace SysBot.Pokemon
                 var cd = AbuseSettings.TradeCooldown;
                 if (cd != 0 && TimeSpan.FromMinutes(cd) > delta)
                 {
-                    poke.Notifier.SendNotification(this, poke, "You have ignored the trade cooldown set by the bot owner. The owner has been notified.");
+                    poke.Notifier.SendNotification(this, poke, "⚠️ Has ignorado el tiempo de tradeo establecido por el propietario del bot. El propietario ha sido **notificado**.");
                     var msg = $"Found {user.TrainerName}{useridmsg} ignoring the {cd} minute trade cooldown. Last encountered {delta.TotalMinutes:F1} minutes ago.";
                     if (AbuseSettings.EchoNintendoOnlineIDCooldown)
                         msg += $"\nID: {TrainerNID}";
