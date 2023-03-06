@@ -10,7 +10,7 @@ namespace SysBot.Pokemon.Discord
     public class PoolModule<T> : ModuleBase<SocketCommandContext> where T : PKM, new()
     {
         [Command("poolReload")]
-        [Summary("Reloads the bot pool from the setting's folder.")]
+        [Summary("Recarga el grupo de bots desde la carpeta de configuración.")]
         [RequireSudo]
         public async Task ReloadPoolAsync()
         {
@@ -19,13 +19,13 @@ namespace SysBot.Pokemon.Discord
 
             var pool = hub.Ledy.Pool.Reload(hub.Config.Folder.DistributeFolder);
             if (!pool)
-                await ReplyAsync("Failed to reload from folder.").ConfigureAwait(false);
+                await ReplyAsync("No se pudo recargar desde la carpeta.").ConfigureAwait(false);
             else
-                await ReplyAsync($"Reloaded from folder. Pool count: {hub.Ledy.Pool.Count}").ConfigureAwait(false);
+                await ReplyAsync($"Recargado desde la carpeta. Recuento de grupos: {hub.Ledy.Pool.Count}").ConfigureAwait(false);
         }
 
         [Command("pool")]
-        [Summary("Displays the details of Pokémon files in the random pool.")]
+        [Summary("Muestra los detalles de los archivos Pokémon en el grupo aleatorio.")]
         public async Task DisplayPoolCountAsync()
         {
             var me = SysCord<T>.Runner;
@@ -44,11 +44,11 @@ namespace SysBot.Pokemon.Discord
                     x.Value = msg;
                     x.IsInline = false;
                 });
-                await ReplyAsync("Pool Details", embed: embed.Build()).ConfigureAwait(false);
+                await ReplyAsync("Detalles del grupo", embed: embed.Build()).ConfigureAwait(false);
             }
             else
             {
-                await ReplyAsync($"Pool Count: {count}").ConfigureAwait(false);
+                await ReplyAsync($"Recuento de grupos: {count}").ConfigureAwait(false);
             }
         }
     }
