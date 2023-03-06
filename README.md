@@ -7,15 +7,13 @@ Si todo lo que quieres es solicitar Pokémon, ¡ve allí!
 Este es un sysbot personalizado traducido al español, la funcionalidad Scarlet/Violet de este bot no fue creada ni admitida por los desarrolladores de PKHeX, ¡no los molestes!
 [Lea las instrucciones oficiales en la wiki](https://github.com/kwsch/SysBot.NET/wiki/Bot-Startup-Details) si nunca ha alojado un sysbot.
 
-[Download the latest build of this bot here](https://berichan.github.io/GetNHSE?sv)
+## Supporte Discord:
 
-## Support Discord:
-
-For support on setting up your own instance of this SysBot, feel free to join the discord! (This sysbot isn't supported by the PKHeX-Projects discord, please do not ask for help there or bother them with questions related to this bot.)
+Si necesita ayuda para configurar su propia instancia de este SysBot, ¡no dude en unirse al discord! (Este sysbot no es compatible con el discord de PKHeX-Projects, no pida ayuda allí ni los moleste con preguntas relacionadas con este bot).
 
 [<img src="https://canary.discordapp.com/api/guilds/771477382409879602/widget.png?style=banner2">](https://discord.gg/berichan)
 
-[sys-botbase](https://github.com/olliz0r/sys-botbase) client for remote control automation of Nintendo Switch consoles.
+[sys-botbase](https://github.com/olliz0r/sys-botbase) cliente para la automatización del control remoto de las consolas Nintendo Switch.
 
 ## SysBot.Base:
 - Base logic library to be built upon in game-specific projects.
