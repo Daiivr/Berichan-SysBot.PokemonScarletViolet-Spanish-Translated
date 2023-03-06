@@ -10,7 +10,7 @@ namespace SysBot.Pokemon.Discord
     public class SudoModule : ModuleBase<SocketCommandContext>
     {
         [Command("blacklist")]
-        [Summary("Blacklists mentioned user.")]
+        [Summary("Agrega al usuario mencionado a la lista negra")]
         [RequireSudo]
         // ReSharper disable once UnusedParameter.Global
         public async Task BlackListUsers([Remainder] string _)
@@ -22,7 +22,7 @@ namespace SysBot.Pokemon.Discord
         }
 
         [Command("blacklistComment")]
-        [Summary("Adds a comment for a blacklisted user ID.")]
+        [Summary("Agrega un comentario al ID de un usario en la lista negra.")]
         [RequireSudo]
         // ReSharper disable once UnusedParameter.Global
         public async Task BlackListUsers(ulong id, [Remainder] string comment)
@@ -30,17 +30,17 @@ namespace SysBot.Pokemon.Discord
             var obj = SysCordSettings.Settings.UserBlacklist.List.Find(z => z.ID == id);
             if (obj is null)
             {
-                await ReplyAsync($"Unable to find a user with that ID ({id}).").ConfigureAwait(false);
+                await ReplyAsync($"Incapaz de encontrar un usuario con ese ID: ({id}).").ConfigureAwait(false);
                 return;
             }
 
             var oldComment = obj.Comment;
             obj.Comment = comment;
-            await ReplyAsync($"Done. Changed existing comment ({oldComment}) to ({comment}).").ConfigureAwait(false);
+            await ReplyAsync($"Hecho. Se modificó el comentario existente ({oldComment}) por ({comment}).").ConfigureAwait(false);
         }
 
         [Command("unblacklist")]
-        [Summary("Un-Blacklists mentioned user.")]
+        [Summary("Sacar a un usuario de la lista negra.")]
         [RequireSudo]
         // ReSharper disable once UnusedParameter.Global
         public async Task UnBlackListUsers([Remainder] string _)
@@ -52,9 +52,9 @@ namespace SysBot.Pokemon.Discord
         }
 
         [Command("blacklistId")]
-        [Summary("Blacklists IDs. (Useful if user is not in the server).")]
+        [Summary("Identificaciones de listas negras. (Útil si el usuario no está en el servidor).")]
         [RequireSudo]
-        public async Task BlackListIDs([Summary("Comma Separated Discord IDs")][Remainder] string content)
+        public async Task BlackListIDs([Summary("Separa los ID de Discord por comas")][Remainder] string content)
         {
             var IDs = GetIDs(content);
             var objects = IDs.Select(GetReference);
@@ -63,9 +63,9 @@ namespace SysBot.Pokemon.Discord
         }
 
         [Command("unBlacklistId")]
-        [Summary("Un-Blacklists IDs. (Useful if user is not in the server).")]
+        [Summary("Un-Blacklists IDsIdentificaciones no incluidas en listas negras. (Útil si el usuario no está en el servidor).")]
         [RequireSudo]
-        public async Task UnBlackListIDs([Summary("Comma Separated Discord IDs")][Remainder] string content)
+        public async Task UnBlackListIDs([Summary("Separa los ID de Discord por comas")][Remainder] string content)
         {
             var IDs = GetIDs(content);
             SysCordSettings.Settings.UserBlacklist.RemoveAll(z => IDs.Any(o => o == z.ID));
@@ -74,7 +74,7 @@ namespace SysBot.Pokemon.Discord
 
         [Command("blacklistSummary")]
         [Alias("printBlacklist", "blacklistPrint")]
-        [Summary("Prints the list of blacklisted users.")]
+        [Summary("Imprime la lista de usuarios en la lista negra.")]
         [RequireSudo]
         public async Task PrintBlacklist()
         {
@@ -85,28 +85,28 @@ namespace SysBot.Pokemon.Discord
 
         [Command("removeAlt")]
         [Alias("removeLog", "rmAlt")]
-        [Summary("Removes an identity (name-id) from the local user-to-trader AntiAbuse database")]
+        [Summary("Relimina una identidad (nombre-id) de la base de datos AntiAbuse local de usuario a comerciante")]
         [RequireSudo]
         public async Task RemoveAltAsync([Remainder] string identity)
         {
             if (NewAntiAbuse.Instance.Remove(identity))
-                await ReplyAsync($"{identity} has been removed from the database.").ConfigureAwait(false);
+                await ReplyAsync($"{identity} ha sido eliminado de la base de datos.").ConfigureAwait(false);
             else
-                await ReplyAsync($"{identity} is not a valid identity.").ConfigureAwait(false);
+                await ReplyAsync($"{identity} no es una identidad valida.").ConfigureAwait(false);
         }
 
         private RemoteControlAccess GetReference(IUser channel) => new()
         {
             ID = channel.Id,
             Name = channel.Username,
-            Comment = $"Added by {Context.User.Username} on {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
+            Comment = $"Agregado por: {Context.User.Username} el {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
         };
 
         private RemoteControlAccess GetReference(ulong id) => new()
         {
             ID = id,
             Name = "Manual",
-            Comment = $"Added by {Context.User.Username} on {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
+            Comment = $"Agregado por: {Context.User.Username} el {DateTime.Now:yyyy.MM.dd-hh:mm:ss}",
         };
 
         protected static IEnumerable<ulong> GetIDs(string content)
