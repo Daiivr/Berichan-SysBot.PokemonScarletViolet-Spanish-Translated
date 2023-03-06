@@ -34,8 +34,8 @@ namespace SysBot.Pokemon.Discord
 
             builder.AddField("Informacion",
                 $"- [Código fuente]({repo})\n" +
-                $"- [Código fuente en español]({ESP})\n" + 
-                $"- {Format.Bold("Dueña")}: {app.Owner} ({app.Owner.Id})\n" +
+                $"- [Bot en español]({ESP})\n" + 
+                $"- {Format.Bold("Dueño")}: {app.Owner} ({app.Owner.Id})\n" +
                 $"- {Format.Bold("Biblioteca")}: Discord.Net ({DiscordConfig.Version})\n" +
                 $"- {Format.Bold("Tiempo de actividad")}: {GetUptime()}\n" +
                 $"- {Format.Bold("Tiempo de ejecución")}: {RuntimeInformation.FrameworkDescription} {RuntimeInformation.ProcessArchitecture} " +
