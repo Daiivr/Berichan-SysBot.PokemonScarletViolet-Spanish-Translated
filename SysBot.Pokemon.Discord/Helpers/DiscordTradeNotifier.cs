@@ -34,32 +34,32 @@ namespace SysBot.Pokemon.Discord
         public void TradeInitialize(PokeRoutineExecutor<T> routine, PokeTradeDetail<T> info)
         {
             var receive = Data.Species == 0 ? string.Empty : $" ({Data.Nickname})";
-            Trader.SendMessageAsync($"Initializing trade{receive}. Please be ready. Your code is **{Code:0000 0000}**.").ConfigureAwait(false);
+            Trader.SendMessageAsync($"Iniciando __trade__ **{receive}**. Porfavor este atento. Tu codigo es: **{Code:0000 0000}**.").ConfigureAwait(false);
         }
 
         public void TradeSearching(PokeRoutineExecutor<T> routine, PokeTradeDetail<T> info)
         {
             var name = Info.TrainerName;
             var trainer = string.IsNullOrEmpty(name) ? string.Empty : $", {name}";
-            Trader.SendMessageAsync($"I'm waiting for you{trainer}! Your code is **{Code:0000 0000}**. My IGN is **{routine.InGameName}**.").ConfigureAwait(false);
+            Trader.SendMessageAsync($"Estoy esperando por ti, **{trainer}**! __Tienes **40 segundos**__. Tu codigo es: **{Code:0000 0000}**. Mi __IGN__ es: **{routine.InGameName}**.").ConfigureAwait(false);
         }
 
         public void TradeCanceled(PokeRoutineExecutor<T> routine, PokeTradeDetail<T> info, PokeTradeResult msg)
         {
             OnFinish?.Invoke(routine);
-            Trader.SendMessageAsync($"Trade canceled: {msg}").ConfigureAwait(false);
+            Trader.SendMessageAsync($"✘ Trade __cancelado__: {msg}").ConfigureAwait(false);
             if (msg == PokeTradeResult.NoTrainerWasFound)
-                CommandSentChannel.SendMessageAsync($"{Trader.Mention} - Something happened with your trade: {msg}. Your request has been removed");
+                CommandSentChannel.SendMessageAsync($"⚠️ {Trader.Mention} ➜ Algo pasó con tu **trade**: {msg}. Su solicitud ha sido __**eliminada**__.");
         }
 
         public void TradeFinished(PokeRoutineExecutor<T> routine, PokeTradeDetail<T> info, T result)
         {
             OnFinish?.Invoke(routine);
             var tradedToUser = Data.Species;
-            var message = tradedToUser != 0 ? $"Trade finished. Enjoy your {(Species)tradedToUser}!" : "Trade finished!";
+            var message = tradedToUser != 0 ? $"✓ Trade finalizado. Disfruta de tu **{(Species)tradedToUser}**!" : "Trade finalizado!";
             Trader.SendMessageAsync(message).ConfigureAwait(false);
             if (result.Species != 0 && Hub.Config.Discord.ReturnPKMs)
-                Trader.SendPKMAsync(result, "Here's what you traded me!").ConfigureAwait(false);
+                Trader.SendPKMAsync(result, "Aqui esta lo que me enviaste!").ConfigureAwait(false);
         }
 
         public void SendNotification(PokeRoutineExecutor<T> routine, PokeTradeDetail<T> info, string message)
@@ -98,7 +98,7 @@ namespace SysBot.Pokemon.Discord
                 x.Value = lines;
                 x.IsInline = false;
             });
-            var msg = $"Here are the details for `{r.Seed:X16}`:";
+            var msg = $"Aqui estan los detalles para: `{r.Seed:X16}`:";
             Trader.SendMessageAsync(msg, embed: embed.Build()).ConfigureAwait(false);
         }
 
@@ -107,7 +107,7 @@ namespace SysBot.Pokemon.Discord
             if (ReminderSent)
                 return;
             ReminderSent = true;
-            Trader.SendMessageAsync($"[Reminder] {Trader.Mention} You are currently position {position} in the queue. Your trade will start soon!");
+            Trader.SendMessageAsync($"**[**Recordatorio**]** {Trader.Mention} ➜ Tu posición actual es: **{position}**. Su trade comenzará pronto!");
         }
     }
 }
