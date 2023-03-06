@@ -16,13 +16,13 @@ namespace SysBot.Pokemon.Discord
         {
             if ((uint)code > MaxTradeCode)
             {
-                await context.Channel.SendMessageAsync("Trade code should be 00000000-99999999!").ConfigureAwait(false);
+                await context.Channel.SendMessageAsync("El codigo de tradeo debe ser un numero entre: 00000000-99999999!").ConfigureAwait(false);
                 return;
             }
 
             try
             {
-                const string helper = "I've added you to the queue! I'll message you here when your trade is starting.";
+                const string helper = "✓ Te he añadido a la __lista__! Te enviaré un __mensaje__ aquí cuando comience tu operación...";
                 IUserMessage test = await trader.SendMessageAsync(helper).ConfigureAwait(false);
 
                 // Try adding
@@ -31,7 +31,7 @@ namespace SysBot.Pokemon.Discord
                 // Notify in channel
                 await context.Channel.SendMessageAsync(msg).ConfigureAwait(false);
                 // Notify in PM to mirror what is said in the channel.
-                await trader.SendMessageAsync($"{msg}\nYour trade code will be **{code:0000 0000}**.").ConfigureAwait(false);
+                await trader.SendMessageAsync($"{msg}\nTu codigo de tradeo sera: **{code:0000 0000}**.").ConfigureAwait(false);
 
                 // Clean Up
                 if (result)
@@ -74,7 +74,7 @@ namespace SysBot.Pokemon.Discord
 
             if (added == QueueResultAdd.AlreadyInQueue)
             {
-                msg = "Sorry, you are already in the queue.";
+                msg = "✘ {user.Mention} Lo siento, ya estás en la cola..";
                 return false;
             }
 
@@ -87,14 +87,14 @@ namespace SysBot.Pokemon.Discord
 
             var pokeName = "";
             if (t == PokeTradeType.Specific && pk.Species != 0)
-                pokeName = $" Receiving: {(Species)pk.Species}.";
-            msg = $"{user.Mention} - Added to the {type} queue{ticketID}. Current Position: {position.Position}.{pokeName}";
+                pokeName = $" Recibiendo: **{(Species)pk.Species}**.";
+            msg = $"{user.Mention} ➜ Agregado al **{type}**{ticketID}. Posicion actual: **{position.Position}**.{pokeName}";
 
             var botct = Info.Hub.Bots.Count;
             if (position.Position > botct)
             {
                 var eta = Info.Hub.Config.Queues.EstimateDelay(position.Position, botct);
-                msg += $" Estimated: {eta:F1} minutes.";
+                msg += $" Tiempo estimado: **{eta:F1}** minutos.";
             }
             return true;
         }
@@ -111,7 +111,7 @@ namespace SysBot.Pokemon.Discord
                         if (!permissions.SendMessages)
                         {
                             // Nag the owner in logs.
-                            message = "You must grant me \"Send Messages\" permissions!";
+                            message = "¡Debes otorgarme permisos de \"Enviar mensajes\"!";
                             Base.LogUtil.LogError(message, "QueueHelper");
                             return;
                         }
@@ -119,13 +119,13 @@ namespace SysBot.Pokemon.Discord
                         {
                             var app = await context.Client.GetApplicationInfoAsync().ConfigureAwait(false);
                             var owner = app.Owner.Id;
-                            message = $"<@{owner}> You must grant me \"Manage Messages\" permissions!";
+                            message = $"<@{owner}> ¡Debes otorgarme permisos de \"Enviar mensajes\"!";
                         }
                     }; break;
                 case DiscordErrorCode.CannotSendMessageToUser:
                     {
                         // The user either has DMs turned off, or Discord thinks they do.
-                        message = context.User == trader ? "You must enable private messages in order to be queued!" : "The mentioned user must enable private messages in order for them to be queued!";
+                        message = context.User == trader ? "✘ Debes __habilitar__ los mensajes privados para poder __intercambiar__ con el bot!" : "El usuario mencionado debe __habilitar__ los mensajes privados para poder tradear!";
                     }; break;
                 default:
                     {
