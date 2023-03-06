@@ -74,7 +74,7 @@ namespace SysBot.Pokemon.Discord
 
             if (added == QueueResultAdd.AlreadyInQueue)
             {
-                msg = "✘ {user.Mention} Lo siento, ya estás en la cola..";
+                msg = "✘ {trainer} Lo siento, ya estás en la cola..";
                 return false;
             }
 
