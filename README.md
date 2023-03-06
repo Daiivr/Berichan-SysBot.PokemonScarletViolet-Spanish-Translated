@@ -1,11 +1,11 @@
-# A custom SysBot.NET tradebot for Pokémon Scarlet/Violet
+# Un tradebot SysBot.NET personalizado para Pokémon Escarlata/Violeta
 ![License](https://img.shields.io/badge/License-AGPLv3-blue.svg)
 
-This is the trade bot running on my Twitch channel at [https://twitch.tv/berichandev/](https://twitch.tv/berichandev/)
-If all you want is to request Pokémon, please go there!
+Este es el bot de tradeo que se ejecuta en el canal de Twitch de [berichan](https://twitch.tv/berichandev/)
+Si todo lo que quieres es solicitar Pokémon, ¡ve allí!
 
-This is a custom sysbot, the Scarlet/Violet functionality of this bot is not created or supported by the PKHeX developers, please do not pester them!
-[Read the official startup instructions](https://github.com/kwsch/SysBot.NET/wiki/Bot-Startup-Details) if you've never hosted a switch sysbot.
+Este es un sysbot personalizado traducido al español, la funcionalidad Scarlet/Violet de este bot no fue creada ni admitida por los desarrolladores de PKHeX, ¡no los molestes!
+[Lea las instrucciones oficiales en la wiki](https://github.com/kwsch/SysBot.NET/wiki/Bot-Startup-Details) si nunca ha alojado un sysbot.
 
 [Download the latest build of this bot here](https://berichan.github.io/GetNHSE?sv)
 
