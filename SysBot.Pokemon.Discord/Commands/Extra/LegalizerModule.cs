@@ -7,7 +7,7 @@ namespace SysBot.Pokemon.Discord
     public class LegalizerModule<T> : ModuleBase<SocketCommandContext> where T : PKM, new()
     {
         [Command("legalize"), Alias("alm")]
-        [Summary("Intenta legalizar los datos pkm adjuntos.")]
+        [Summary("Intenta legalizar los datos del pkm adjunto.")]
         public async Task LegalizeAsync()
         {
             var attachments = Context.Message.Attachments;
