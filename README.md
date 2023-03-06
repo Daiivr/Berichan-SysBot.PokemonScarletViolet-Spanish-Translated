@@ -16,40 +16,40 @@ Si necesita ayuda para configurar su propia instancia de este SysBot, ¡no dude 
 [sys-botbase](https://github.com/olliz0r/sys-botbase) cliente para la automatización del control remoto de las consolas Nintendo Switch.
 
 ## SysBot.Base:
-- Base logic library to be built upon in game-specific projects.
-- Contains a synchronous and asynchronous Bot connection class to interact with sys-botbase.
+- Biblioteca de lógica basica que se basará en proyectos específicos del juego.
+- Contiene una clase de conexión Bot síncrona y asíncrona para interactuar con sys-botbase.
 
 ## SysBot.Tests:
-- Unit Tests for ensuring logic behaves as intended :)
+- Pruebas unitarias para garantizar que la lógica se comporte según lo previsto :)
 
-# Example Implementations
+# Implementaciones de ejemplo
 
-The driving force to develop this project is automated bots for Nintendo Switch Pokémon games. An example implementation is provided in this repo to demonstrate interesting tasks this framework is capable of performing. Refer to the [Wiki](https://github.com/kwsch/SysBot.NET/wiki) for more details on the supported Pokémon features.
+La fuerza impulsora para desarrollar este proyecto son los bots automatizados para los juegos Pokémon de Nintendo Switch. En este repositorio se proporciona un ejemplo de implementación para demostrar tareas interesantes que este marco es capaz de realizar. Consulte [Wiki](https://github.com/kwsch/SysBot.NET/wiki) para obtener más detalles sobre las funciones de Pokémon admitidas.
 
 ## SysBot.Pokemon:
-- Class library using SysBot.Base to contain logic related to creating & running Pokémon bots.
+- Biblioteca de clases que usa SysBot.Base para contener la lógica relacionada con la creación y ejecución de bots Pokémon.
 
 ## SysBot.Pokemon.WinForms:
-- Simple GUI Launcher for adding, starting, and stopping Pokémon bots (as described above).
-- Configuration of program settings is performed in-app and is saved as a local json file.
+- Lanzador de GUI simple para agregar, iniciar y detener bots Pokémon (como se describe anteriormente).
+- La configuración de los ajustes del programa se realiza en la aplicación y se guarda como un archivo json local.
 
 ## SysBot.Pokemon.Discord:
-- Discord interface for remotely interacting with the WinForms GUI.
-- Provide a discord login token and the Roles that are allowed to interact with your bots.
-- Commands are provided to manage & join the distribution queue.
+- Interfaz de Discord para interactuar de forma remota con la GUI de WinForms.
+- Proporcione un token de inicio de sesión de discord y los roles que pueden interactuar con sus bots.
+- Se proporcionan comandos para administrar y unirse a la cola de distribución.
 
 ## SysBot.Pokemon.Twitch:
-- Twitch.tv interface for remotely announcing when the distribution starts.
-- Provide a Twitch login token, username, and channel for login.
+- Interfaz Twitch.tv para anunciar de forma remota cuando comienza la distribución.
+- Pproporcione un token de inicio de sesión de Twitch, un nombre de usuario y un canal para iniciar sesión.
 
 ## SysBot.Pokemon.YouTube:
-- YouTube.com interface for remotely announcing when the distribution starts.
-- Provide a YouTube login ClientID, ClientSecret, and ChannelID for login.
+- Interfaz de YouTube.com para anunciar de forma remota cuándo comienza la distribución.
+- Proporcione un ID de cliente de inicio de sesión de YouTube, ClientSecret y ChannelID para iniciar sesión.
 
-Uses [Discord.Net](https://github.com/discord-net/Discord.Net) , [TwitchLib](https://github.com/TwitchLib/TwitchLib) and [StreamingClientLibary](https://github.com/SaviorXTanren/StreamingClientLibrary) as a dependency via Nuget.
+Usa [Discord.Net](https://github.com/discord-net/Discord.Net) , [TwitchLib](https://github.com/TwitchLib/TwitchLib) y [StreamingClientLibary](https://github.com/SaviorXTanren/StreamingClientLibrary) como una dependencia a través de Nuget.
 
-## Other Dependencies
-Pokémon API logic is provided by [PKHeX](https://github.com/kwsch/PKHeX/), and template generation is provided by [AutoMod](https://github.com/architdate/PKHeX-Plugins/).
+## Otras dependencias
+La lógica de la API de Pokémon proporcionada por: [PKHeX](https://github.com/kwsch/PKHeX/), y la generación de plantillas es proporcionada por: [AutoMod](https://github.com/architdate/PKHeX-Plugins/).
 
-# License
-Refer to the `License.md` for details regarding licensing.
+# Licencia
+Consulte `License.md` para obtener detalles sobre la concesión de licencias.
