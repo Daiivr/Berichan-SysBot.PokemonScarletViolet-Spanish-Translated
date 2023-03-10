@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: DaiPC
+  name: DaiPc
   vmImage: 'windows-2022'
   demands:
   - msbuild
