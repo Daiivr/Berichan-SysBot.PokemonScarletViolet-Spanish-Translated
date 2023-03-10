@@ -24,7 +24,7 @@ Si necesita ayuda para configurar su propia instancia de este SysBot, ¡no dude 
 
 # Implementaciones de ejemplo
 
-La fuerza impulsora para desarrollar este proyecto son los bots automatizados para los juegos Pokémon de Nintendo Switch. En este repositorio se proporciona un ejemplo de implementación para demostrar tareas interesantes que este marco es capaz de realizar. Consulte [Wiki](https://github.com/kwsch/SysBot.NET/wiki) para obtener más detalles sobre las funciones de Pokémon admitidas.
+La fuerza impulsora para desarrollar este proyecto son los bots automatizados para los juegos Pokémon de Nintendo Switch. En este repositorio se proporciona un ejemplo de implementación para demostrar tareas interesantes que este marco es capaz de realizar. Consulte la [Wiki](https://github.com/kwsch/SysBot.NET/wiki) para obtener más detalles sobre las funciones de Pokémon admitidas.
 
 ## SysBot.Pokemon:
 - Biblioteca de clases que usa SysBot.Base para contener la lógica relacionada con la creación y ejecución de bots Pokémon.
