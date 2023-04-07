@@ -28,7 +28,7 @@ namespace SysBot.Pokemon
             if (!InQueue || Detail is null)
                 return "No estás en la cola.";
             var position = $"{Position}/{QueueCount}";
-            var msg = $"YEstás en la cola: {Detail.Type}! Posición: {position} (ID {Detail.Trade.ID})";
+            var msg = $"Estás en la cola: {Detail.Type}! Posición: {position} (ID {Detail.Trade.ID})";
             var pk = Detail.Trade.TradeData;
             if (pk.Species != 0)
                 msg += $", Recibiendo: {(Species)Detail.Trade.TradeData.Species}";
