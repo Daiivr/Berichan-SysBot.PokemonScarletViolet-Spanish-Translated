@@ -131,23 +131,23 @@ namespace SysBot.Pokemon.Twitch
 
             if (added == QueueResultAdd.AlreadyInQueue)
             {
-                msg = $"@{name}: Sorry, you are already in the queue.";
+                msg = $"❌ @{name}: Lo siento, ya estás en la cola.";
                 return false;
             }
 
             var position = Info.CheckPosition(userID);
             notifier.QueueSizeEntry = position.Position;
-            msg = $"@{name}: Added to the {type} queue, unique ID: {detail.ID}. Current Position: {position.Position}";
+            msg = $"@{name} ➜ Añadido a la cola {type}, ID único: {detail.ID}. Posición actual: {position.Position}";
 
             var botct = Info.Hub.Bots.Count;
             if (position.Position > botct)
             {
                 var eta = Info.Hub.Config.Queues.EstimateDelay(position.Position, botct);
-                msg += $". Estimated: {eta:F1} minutes.";
+                msg += $". Tiempo estimado: {eta:F1} minutos.";
             }
 
-            if (strLen < 8) msg += " Your code was not 8 digits as requested, ensure you've added 0s at the beginning of it when searching.";
-            if (strLen > 8) msg += " Your code was not 8 digits as requested, ensure you only search for the first 8 digits.";
+            if (strLen < 8) msg += " ⚠️ Su código no era de 8 dígitos como se solicitaba, asegúrese de que ha añadido 0s al principio del mismo al realizar la búsqueda..";
+            if (strLen > 8) msg += " ⚠️ Su código no tenía los 8 dígitos solicitados, asegúrese de buscar sólo los 8 primeros dígitos.";
             return true;
         }
 
