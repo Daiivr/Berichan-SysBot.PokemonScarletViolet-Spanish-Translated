@@ -36,7 +36,7 @@ namespace SysBot.Pokemon.Twitch
             {
                 if (NotifyPings.Count >= Config.Twitch.ReminderTagCount)
                 {
-                    string msg = "[REMINDER] " + string.Join(" ", NotifyPings) + $" You are all currently in the queue and below position {Config.Queues.ReminderAtPosition}. I will send you a trade starting message shortly! Ensure you are connected (L button) and ready!";
+                    string msg = "[RECORDATORIO] " + string.Join(" ", NotifyPings) + $" Todos están actualmente en la cola y por debajo de la posición {Config.Queues.ReminderAtPosition}. ¡Le enviaré un mensaje de inicio comercial en breve! Asegúrese de estar conectado (Boton L) y listo!";
                     Client.SendMessage(Config.Twitch.Channel, msg);
                     NotifyPings.Clear();
                 }
