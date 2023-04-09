@@ -17,13 +17,13 @@ namespace SysBot.Pokemon.Twitch
 
             if (!TwitchBot<T>.Info.GetCanQueue() || !TwitchBot<T>.CanQueueTwitch)
             {
-                msg = "Sorry, I am not currently accepting queue requests!";
+                msg = "❌ Lo siento, actualmente no acepto solicitudes de cola.";
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(setstring))
             {
-                msg = $"@{username}: You need to request something! Include the Pok�mon name in your command.";
+                msg = $"⚠️ @{username}: ¡Tienes que pedir algo! Incluye el nombre del Pokémon en tu orden.";
                 return false;
             }
 
@@ -37,19 +37,19 @@ namespace SysBot.Pokemon.Twitch
                     var set = ShowdownUtil.ConvertToShowdown(setstring);
                     if (set == null)
                     {
-                        msg = $"Skipping trade, @{username}: Empty nickname provided for the species.";
+                        msg = $"⚠️ Omitiendo el intercambio, @{username}: Apodo vacío proporcionado para la especie.";
                         return false;
                     }
                     var template = AutoLegalityWrapper.GetTemplate(set);
                     if (template.Species < 1)
                     {
-                        msg = $"Skipping trade, @{username}: Please read what you are supposed to type as the command argument, ensure your species name and customization lines are correct.";
+                        msg = $"⚠️ Omitiendo el intercambio, @{username}: Por favor, lea lo que se supone que debe escribir como argumento del comando, asegúrese de que el nombre de su especie y las líneas de personalización son correctas.";
                         return false;
                     }
 
                     if (set.InvalidLines.Count != 0)
                     {
-                        msg = $"Skipping trade, @{username}: Unable to parse Showdown Set:\n{string.Join("\n", set.InvalidLines)}";
+                        msg = $"⚠️ Omitiendo el intercambio, @{username}: No se puede analizar el conjunto Showdown:\n{string.Join("\n", set.InvalidLines)}";
                         return false;
                     }
 
@@ -59,13 +59,13 @@ namespace SysBot.Pokemon.Twitch
 
                 if (pkm == null)
                 {
-                    msg = $"Skipping trade, @{username}: Unable to legalize the Pok�mon.";
+                    msg = $"⚠️ Omitiendo el intercambio, @{username}: No se puede legalizar el Pokémon.";
                     return false;
                 }
 
                 if (!pkm.CanBeTraded())
                 {
-                    msg = $"Skipping trade, @{username}: Provided Pok�mon content is blocked from trading!";
+                    msg = $"⚠️ Omitiendo el intercambio, El contenido Pokémon proporcionado está bloqueado para el comercio!";
                     return false;
                 }
 
@@ -78,20 +78,20 @@ namespace SysBot.Pokemon.Twitch
                         var tq = new TwitchQueue<T>(pk, new PokeTradeTrainerInfo(display, mUserId), username, sub);
                         TwitchBot<T>.QueuePool.RemoveAll(z => z.UserName == username); // remove old requests if any
                         TwitchBot<T>.QueuePool.Add(tq);
-                        msg = $"NICE! @{username} - added to the waiting list. Please whisper your 8-digit trade code to me! (whisper this bot, not the streamer) {msgAddParams}";
+                        msg = $"MUY BIEN! @{username} ➜ Añadido a la lista de espera. Por favor, susúrrame tu código comercial de 8 dígitos! (Susurre a este bot, no el streamer) {msgAddParams}";
                         return true;
                     }
                 }
 
-                var reason = result == "Timeout" ? "Set took too long to generate." : "Unable to legalize the Pok�mon.";
-                msg = $"Skipping trade, @{username}: {reason}";
+                var reason = result == "Timeout" ? "El conjunto tardó demasiado en generarse." : "No se puede legalizar el Pokémon.";
+                msg = $"⚠️ Omitiendo el intercambio, @{username}: {reason}";
             }
 
             catch (Exception ex)
 
             {
                 LogUtil.LogSafe(ex, nameof(TwitchCommandsHelper<T>));
-                msg = $"Skipping trade, @{username}: Your command or syntax is invalid.";
+                msg = $"⚠️  Omitiendo el intercambio, @{username}: El comando o la sintaxis no son válidos.";
             }
             return false;
         }
@@ -113,10 +113,10 @@ namespace SysBot.Pokemon.Twitch
         {
             return result switch
             {
-                QueueResultRemove.CurrentlyProcessing => "Looks like you're currently being processed! Did not remove from queue.",
-                QueueResultRemove.CurrentlyProcessingRemoved => "Looks like you're currently being processed! Removed from queue.",
-                QueueResultRemove.Removed => "Removed you from the queue.",
-                _ => "Sorry, you are not currently in the queue.",
+                QueueResultRemove.CurrentlyProcessing => "⚠️ ¡Parece que actualmente está siendo procesado! No se eliminó de la cola.",
+                QueueResultRemove.CurrentlyProcessingRemoved => "⚠️  ¡Parece que actualmente está siendo procesado! Eliminado de la cola.",
+                QueueResultRemove.Removed => "✔️ Eliminado de la cola.",
+                _ => "⚠️ Lo sentimos, no estás actualmente en la cola.",
             };
         }
 
@@ -124,8 +124,8 @@ namespace SysBot.Pokemon.Twitch
         {
             var detail = TwitchBot<T>.Info.GetDetail(parse);
             return detail == null
-                ? "Sorry, you are not currently in the queue."
-                : $"Your trade code is {detail.Trade.Code:0000 0000}";
+                ? "⚠️ Lo sentimos, no estás actualmente en la cola."
+                : $"Su código comercial es {detail.Trade.Code:0000 0000}";
         }
     }
 }
