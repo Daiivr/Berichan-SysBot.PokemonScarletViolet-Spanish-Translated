@@ -586,8 +586,6 @@ namespace SysBot.Pokemon
 
             // Inject the shown Pokémon.
             var clone = (PA8)offered.Clone();
-            if (Hub.Config.Legality.ResetHOMETracker)
-                clone.Tracker = 0;
 
             poke.SendNotification(this, $"**He __clonado__ tu {GameInfo.GetStrings(1).Species[clone.Species]}!**\nAhora __preciosa__ **B** para cancelar y luego seleccione un Pokémon que no quieras para reliazar el tradeo.");
             Log($"Cloned a {(Species)clone.Species}. Waiting for user to change their Pokémon...");
